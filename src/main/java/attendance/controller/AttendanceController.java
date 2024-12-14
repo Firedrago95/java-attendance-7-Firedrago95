@@ -20,6 +20,7 @@ public class AttendanceController {
             }
             attendanceCheck(input);
             attendanceEdit(input);
+            printMemberAttendanceRecord(input);
         }
 
     }
@@ -48,4 +49,12 @@ public class AttendanceController {
         }
     }
 
+
+    private void printMemberAttendanceRecord(String input) {
+        if (input.equals("3")) {
+            String name = InputView.readName();
+            service.checkExistName(name);
+            OutputView.printAttendanceRecord(name, service.getAttendanceRecord(name));
+        }
+    }
 }

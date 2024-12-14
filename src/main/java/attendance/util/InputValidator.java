@@ -8,7 +8,7 @@ public class InputValidator {
 
     private static final Pattern FUNCTION_REGEX = Pattern.compile("[1234Q]");
     private static final Pattern NAME_REGEX = Pattern.compile("[가-힣]+");
-    private static final Pattern TIME_REGEX = Pattern.compile("(0[0-9]|1[1-9]|2[0-3]):([0-5][0-9])");
+    private static final Pattern TIME_REGEX = Pattern.compile("(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])");
     private static final Pattern DATE_REGEX = Pattern.compile("\\d+");
 
     public static void checkFunction(String input) {

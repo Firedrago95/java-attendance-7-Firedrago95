@@ -4,6 +4,7 @@ import attendance.util.Formatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Member {
@@ -37,7 +38,7 @@ public class Member {
     public String editAttendance(LocalDateTime time) {
         LocalDate editDate = time.toLocalDate();
         LocalDateTime findDate = attendanceRecord.stream()
-            .filter(record -> record.equals(editDate))
+            .filter(record -> record.toLocalDate().equals(editDate))
             .findFirst().get();
         int index = attendanceRecord.indexOf(findDate);
         attendanceRecord.set(index, time);
@@ -50,6 +51,17 @@ public class Member {
         sb.append(" -> ");
         sb.append(Formatter.getShortFormat(time));
         sb.append(" 수정 완료!");
+        return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        List<LocalDateTime> copy = new ArrayList<>(attendanceRecord);
+        Collections.sort(copy);
+        copy.forEach(s -> {
+            sb.append(Formatter.getFormat(s) + System.lineSeparator());
+        });
         return sb.toString();
     }
 }

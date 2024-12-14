@@ -27,4 +27,9 @@ public class OutputView {
     public static void printEditmessage(String message) {
         System.out.println(message);
     }
+
+    public static void printAttendanceRecord(String name, String message) {
+        System.out.println(String.format("이번 달 %s의 출석 기록입니다.", name));
+        System.out.println(message);
+    }
 }

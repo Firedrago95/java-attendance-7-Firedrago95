@@ -41,4 +41,9 @@ public class Members {
             .findFirst().get();
         return findMember;
     }
+
+    public String getAttendanceRecord(String name) {
+        Member findMember = getFindMember(name);
+        return findMember.toString();
+    }
 }

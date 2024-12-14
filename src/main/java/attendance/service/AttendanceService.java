@@ -41,4 +41,7 @@ public class AttendanceService {
         return members.editAttendance(name, time);
     }
 
+    public String getAttendanceRecord(String name) {
+        return members.getAttendanceRecord(name);
+    }
 }

@@ -1,13 +1,12 @@
 package attendance;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertNowTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -66,7 +65,7 @@ class ApplicationTest extends NsTest {
                     "12월 09일 월요일 13:00 (출석)",
                     "12월 10일 화요일 10:00 (출석)",
                     "12월 11일 수요일 --:-- (결석)",
-                    "12월 12일 목요일 10:31 (결석)",
+                    "12월 12일 목요 일 10:31 (결석)",
                     "출석: 7회",
                     "지각: 0회",
                     "결석: 2회",

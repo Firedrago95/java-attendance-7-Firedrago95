@@ -23,8 +23,8 @@ public class LateDesicion {
             }
             return "(결석)";
         }
-        lateTime = LocalTime.of(8,05);
-        absenseTime = LocalTime.of(8, 30);
+        lateTime = LocalTime.of(10,05);
+        absenseTime = LocalTime.of(10, 30);
         if ((attend.equals(openTime)|| attend.isAfter(openTime))
             && attend.isBefore(lateTime)) {
             return "(출석)";
