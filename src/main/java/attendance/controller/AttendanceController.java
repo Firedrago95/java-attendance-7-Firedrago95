@@ -17,17 +17,28 @@ public class AttendanceController {
             if (input.equals("Q")) {
                 break;
             }
-            if (input.equals("1")) {
-                AttendanceValidator.checkToday();
-                String name = InputView.readName();
-                service.checkExistName(name);
-                LocalDateTime time = InputView.readTime();
-                boolean alreadyCheck = service.checkAttendance(name, time);
-                String message = LateDesicion.judgeTime(time);
-                OutputView.printCheckAttendance(time, alreadyCheck, message);
-            }
+            attendanceCheck(input);
+            attendanceEdit(input);
         }
 
+    }
+
+    private void attendanceCheck(String input) {
+        if (input.equals("1")) {
+            AttendanceValidator.checkToday();
+            String name = InputView.readName();
+            service.checkExistName(name);
+            LocalDateTime time = InputView.readTime();
+            boolean alreadyCheck = service.checkAttendance(name, time);
+            String message = LateDesicion.judgeTime(time);
+            OutputView.printCheckAttendance(time, alreadyCheck, message);
+        }
+    }
+
+    private void attendanceEdit(String input) {
+        if (input.equals("2")) {
+
+        }
     }
 
 }
