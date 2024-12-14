@@ -26,17 +26,21 @@ public class AttendanceReader {
         br.readLine();
         String line;
         while ((line = br.readLine()) != null) {
-            String[] split = line.split(",");
-            String name = split[0];
-            if (hasNotName(name, members)) {
-                members.add(new Member(name));
-            }
-            String attendance = split[1];
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime localDateTime = LocalDateTime.parse(attendance, formatter);
-            addAttendanceRecord(name, localDateTime,members);
+            addMembers(members, line);
         }
         return members;
+    }
+
+    private static void addMembers(List<Member> members, String line) {
+        String[] split = line.split(",");
+        String name = split[0];
+        if (hasNotName(name, members)) {
+            members.add(new Member(name));
+        }
+        String attendance = split[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(attendance, formatter);
+        addAttendanceRecord(name, localDateTime, members);
     }
 
     private static boolean hasNotName(String name, List<Member> members) {
