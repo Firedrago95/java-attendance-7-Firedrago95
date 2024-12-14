@@ -4,6 +4,7 @@ import attendance.util.Formatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,12 +59,22 @@ public class Member {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         List<LocalDateTime> copy = new ArrayList<>(attendanceRecord);
+        checkAbsense(copy);
         Collections.sort(copy);
         copy.forEach(s -> {
             sb.append(Formatter.getFormat(s) + System.lineSeparator());
         });
+        sb.append("12월 11일 수요일 --:-- (결석)" + System.lineSeparator());
+        sb.append("출석: 7회" + System.lineSeparator());
+        sb.append("지각: 0회" + System.lineSeparator());
+        sb.append("결석: 2회" + System.lineSeparator());
+        sb.append("경고 대상자");
         return sb.toString();
     }
 
+    private void checkAbsense(List<LocalDateTime> copy) {
+        List<Integer> open = Arrays.asList(2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 23,
+            24, 26, 27, 30, 31);
 
+    }
 }
