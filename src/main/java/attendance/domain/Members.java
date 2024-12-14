@@ -21,16 +21,24 @@ public class Members {
     }
 
     public boolean checkAlreadyAttendance(String name, LocalDateTime time) {
-        Member findMember = members.stream()
-            .filter(member -> member.getName().equals(name))
-            .findFirst().get();
+        Member findMember = getFindMember(name);
         return findMember.hasAttendance(time);
     }
 
     public void attendance(String name, LocalDateTime time) {
+        Member findMember = getFindMember(name);
+        findMember.addAttendance(time);
+    }
+
+    public String editAttendance(String name, LocalDateTime time) {
+        Member findMember = getFindMember(name);
+        return findMember.editAttendance(time);
+    }
+
+    private Member getFindMember(String name) {
         Member findMember = members.stream()
             .filter(member -> member.getName().equals(name))
             .findFirst().get();
-        findMember.addAttendance(time);
+        return findMember;
     }
 }

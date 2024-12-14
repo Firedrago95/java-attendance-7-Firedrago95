@@ -1,5 +1,7 @@
 package attendance.domain;
 
+import attendance.util.Formatter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,5 +32,24 @@ public class Member {
 
     public void addAttendance(LocalDateTime time) {
         attendanceRecord.add(time);
+    }
+
+    public String editAttendance(LocalDateTime time) {
+        LocalDate editDate = time.toLocalDate();
+        LocalDateTime findDate = attendanceRecord.stream()
+            .filter(record -> record.equals(editDate))
+            .findFirst().get();
+        int index = attendanceRecord.indexOf(findDate);
+        attendanceRecord.set(index, time);
+        return makePrintForm(findDate, time);
+    }
+
+    private String makePrintForm(LocalDateTime findDate, LocalDateTime time) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Formatter.getFormat(findDate));
+        sb.append(" -> ");
+        sb.append(Formatter.getShortFormat(time));
+        sb.append(" 수정 완료!");
+        return sb.toString();
     }
 }

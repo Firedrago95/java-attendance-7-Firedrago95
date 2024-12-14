@@ -1,8 +1,11 @@
 package attendance.service;
 
+import attendance.constants.ErrorMessage;
 import attendance.domain.AttendanceReader;
 import attendance.domain.Member;
 import attendance.domain.Members;
+import camp.nextstep.edu.missionutils.DateTimes;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,4 +29,16 @@ public class AttendanceService {
     public void checkExistName(String name) {
         members.isExist(name);
     }
+
+    public void checkEditDate(LocalDate date) {
+        LocalDate time = DateTimes.now().toLocalDate();
+        if (date.isAfter(time)) {
+            throw new IllegalArgumentException(ErrorMessage.FUTURE_EDIT.getMessage());
+        }
+    }
+
+    public String editAttendance(String name, LocalDateTime time) {
+        return members.editAttendance(name, time);
+    }
+
 }

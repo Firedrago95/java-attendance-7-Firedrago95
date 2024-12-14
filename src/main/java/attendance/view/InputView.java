@@ -33,11 +33,42 @@ public class InputView {
         return input;
     }
 
+    public static String readEditName() {
+        System.out.println("출석을 수정하려는 크루의 닉네임을 입력해 주세요.");
+        String input = Console.readLine();
+        InputValidator.validateName(input);
+        return input;
+    }
+
     public static LocalDateTime readTime() {
         System.out.println("등교 시간을 입력해 주세요.");
         String input = Console.readLine();
         InputValidator.validateTime(input);
         return convertTime(input);
+    }
+
+    public static LocalDate readDate() {
+        System.out.println("수정하려는 날짜(일)를 입력해 주세요.");
+        String input = Console.readLine();
+        InputValidator.validateDate(input);
+        return convertLocalDate(input);
+    }
+
+    private static LocalDate convertLocalDate(String input) {
+        LocalDate today = DateTimes.now().toLocalDate();
+        return LocalDate.of(today.getYear(), today.getMonth(), Integer.parseInt(input));
+    }
+
+    public static LocalDateTime readEditTime(LocalDate date) {
+        System.out.println("언제로 변경하겠습니까?");
+        String input = Console.readLine();
+        InputValidator.validateTime(input);
+        return convertTime(date, input);
+    }
+
+    private static LocalDateTime convertTime(LocalDate date, String input) {
+        String[] split = input.split(":");
+        return date.atTime(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
     }
 
     private static LocalDateTime convertTime(String input) {

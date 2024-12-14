@@ -14,9 +14,17 @@ public class OutputView {
             System.out.println("이미 출석 하셨습니다. 출석 수정을 이용해주세요");
             return;
         }
-        System.out.println(String.format("%d월 %d일 %s요일 %s %s",
+        System.out.println(getFormat(time, message, formattedTime));
+    }
+
+    private static String getFormat(LocalDateTime time, String message, String formattedTime) {
+        return String.format("%d월 %d일 %s요일 %s %s",
             time.getMonth().getValue(), time.getDayOfMonth(),
-            DayOfWeek.convertName(time.getDayOfWeek().getValue()),formattedTime
-            ,message));
+            DayOfWeek.convertName(time.getDayOfWeek().getValue()), formattedTime
+            , message);
+    }
+
+    public static void printEditmessage(String message) {
+        System.out.println(message);
     }
 }
