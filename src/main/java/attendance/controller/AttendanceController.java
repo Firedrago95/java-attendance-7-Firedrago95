@@ -8,6 +8,7 @@ public class AttendanceController {
     private AttendanceService service = new AttendanceService();
 
     public void run() {
+        service.readAttendanceRecord();
         while (true) {
             String input = InputView.printFunction();
             if (input.equals("Q")) {
