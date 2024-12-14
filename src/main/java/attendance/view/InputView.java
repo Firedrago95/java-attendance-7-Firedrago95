@@ -4,6 +4,7 @@ import attendance.domain.DayOfWeek;
 import attendance.util.InputValidator;
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.DateTimes;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class InputView {
@@ -23,5 +24,25 @@ public class InputView {
         String input = Console.readLine();
         InputValidator.checkFunction(input);
         return input;
+    }
+
+    public static String readName() {
+        System.out.println("닉네임을 입력해 주세요.");
+        String input = Console.readLine();
+        InputValidator.validateName(input);
+        return input;
+    }
+
+    public static LocalDateTime readTime() {
+        System.out.println("등교 시간을 입력해 주세요.");
+        String input = Console.readLine();
+        InputValidator.validateTime(input);
+        return convertTime(input);
+    }
+
+    private static LocalDateTime convertTime(String input) {
+        LocalDate today = DateTimes.now().toLocalDate();
+        String[] split = input.split(":");
+        return today.atTime(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
     }
 }

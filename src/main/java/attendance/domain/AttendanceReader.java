@@ -32,7 +32,7 @@ public class AttendanceReader {
                 members.add(new Member(name));
             }
             String attendance = split[1];
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime localDateTime = LocalDateTime.parse(attendance, formatter);
             addAttendanceRecord(name, localDateTime,members);
         }

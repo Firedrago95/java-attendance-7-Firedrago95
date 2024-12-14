@@ -21,4 +21,14 @@ public class Member {
     public void addAttendanceRecord(LocalDateTime time) {
         attendanceRecord.add(time);
     }
+
+    public boolean hasAttendance(LocalDateTime time) {
+        boolean match = attendanceRecord.stream()
+            .anyMatch(record -> record.toLocalDate().isEqual(time.toLocalDate()));
+        return match;
+    }
+
+    public void addAttendance(LocalDateTime time) {
+        attendanceRecord.add(time);
+    }
 }
