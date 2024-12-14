@@ -21,9 +21,11 @@ public class AttendanceService {
 
     public boolean checkAttendance(String name, LocalDateTime time) {
         boolean alreadyAttend = members.checkAlreadyAttendance(name, time);
-        if (!alreadyAttend) return false;
+        if (alreadyAttend) {
+            throw new IllegalArgumentException(ErrorMessage.ALREADY_CHECK.getMessage());
+        }
         members.attendance(name, time);
-        return true;
+        return false;
     }
 
     public void checkExistName(String name) {
