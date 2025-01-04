@@ -11,6 +11,10 @@ public class DateFormatter {
         int dayOfMonthValue = date.getDayOfMonth();
         String dayOfWeek = DayOfWeek.findLabel(date);
 
-        return String.format("%d월 %d일 %s요일", monthValue, dayOfMonthValue, dayOfWeek);
+        return String.format("%s월 %s일 %s요일", formatTwo(monthValue), formatTwo(dayOfMonthValue), dayOfWeek);
+    }
+
+    private static String formatTwo(int monthValue) {
+        return String.format("%02d", monthValue);
     }
 }
