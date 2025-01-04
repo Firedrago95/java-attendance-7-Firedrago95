@@ -1,6 +1,8 @@
 package attendance.controller;
 
 import attendance.service.AttendanceService;
+import attendance.util.TestTime;
+import attendance.view.InputView;
 
 public class AttendanceController {
 
@@ -8,6 +10,16 @@ public class AttendanceController {
 
     public void run() {
         service.readFile();
+        while (true) {
+            String option = InputView.selectOption(TestTime.now());
+            logAttendance(option);
+        }
+    }
+
+    private void logAttendance(String option) {
+        if (option.equals("1")) {
+
+        }
     }
 
 }

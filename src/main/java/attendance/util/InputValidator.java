@@ -6,7 +6,12 @@ import java.util.regex.Pattern;
 
 public class InputValidator {
 
-    private static final Pattern _REGEX = Pattern.compile("");
+    private static final Pattern OPTION_REGEX = Pattern.compile("[1234Q]");
+
+    public static void validateOption(String input) {
+        checkEmpty(input);
+        checkOptionForm(input);
+    }
 
     private static void checkEmpty(String input) {
         if (input == null || input.isEmpty()) {
@@ -14,8 +19,8 @@ public class InputValidator {
         }
     }
 
-    private static void check_Form(String input) {
-        if (!_REGEX.matcher(input).matches()) {
+    private static void checkOptionForm(String input) {
+        if (!OPTION_REGEX.matcher(input).matches()) {
             throw new IllegalArgumentException(ErrorMessage.WRONG_FORM.getMessage());
         }
     }
