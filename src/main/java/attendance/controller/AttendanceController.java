@@ -1,8 +1,8 @@
 package attendance.controller;
 
 import attendance.service.AttendanceService;
-import attendance.util.TestTime;
 import attendance.view.InputView;
+import camp.nextstep.edu.missionutils.DateTimes;
 
 public class AttendanceController {
 
@@ -11,7 +11,7 @@ public class AttendanceController {
     public void run() {
         service.readFile();
         while (true) {
-            String option = InputView.selectOption(TestTime.now());
+            String option = InputView.selectOption(DateTimes.now());
             logAttendance(option);
         }
     }
