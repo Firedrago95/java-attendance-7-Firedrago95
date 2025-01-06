@@ -3,6 +3,8 @@ package attendance.util;
 import attendance.domain.DayOfWeek;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class DateFormatter {
 
@@ -16,5 +18,15 @@ public class DateFormatter {
 
     private static String formatTwo(int monthValue) {
         return String.format("%02d", monthValue);
+    }
+
+    public static String formatTime(LocalTime time) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return time.format(dateTimeFormatter);
+    }
+
+    public static LocalTime parseTime(String input) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return LocalTime.parse(input, dateTimeFormatter);
     }
 }
