@@ -49,4 +49,22 @@ public class Attendances {
         attendances.add(attendance);
         return attendance.toString();
     }
+
+    public void validateAttendanceRecord(String name, LocalDate date) {
+        boolean hasAttendanceRecord = attendances.stream()
+                .anyMatch(attendance -> attendance.getName().equals(name)
+                        && attendance.getDate().equals(date));
+
+        if (!hasAttendanceRecord) {
+            throw new IllegalArgumentException(ErrorMessage.NO_ATTENDANCE_RECORD.getMessage());
+        }
+    }
+
+    public String editAttendance(String name, LocalDate date, LocalTime time) {
+        Attendance findAttendance = attendances.stream()
+                .filter(attendance -> attendance.getName().equals(name)
+                        && attendance.getDate().equals(date)).findFirst().get();
+
+        return findAttendance.editAttendTime(time);
+    }
 }

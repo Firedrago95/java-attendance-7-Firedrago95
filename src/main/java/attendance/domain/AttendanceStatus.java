@@ -19,7 +19,7 @@ public enum AttendanceStatus {
         if (date.getDayOfWeek().getValue() == 1) {
             return getStatus(13, time);
         }
-        return getStatus(8, time);
+        return getStatus(10, time);
     }
 
     private static AttendanceStatus getStatus(int openTime, LocalTime time) {

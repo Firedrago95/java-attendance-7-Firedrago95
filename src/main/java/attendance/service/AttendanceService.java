@@ -33,6 +33,18 @@ public class AttendanceService {
 
     public String attend(String name, LocalDate now, LocalTime time) {
         attendances.validateDuplicateAttendance(name, now);
-        return attendances.attend(name, now, time);
+        return attendances.attend(name, now, time) + System.lineSeparator();
+    }
+
+    public void checkFuture(LocalDate date) {
+        AttendanceValidator.validateFutureDate(date);
+    }
+
+    public void hasAttendanceRecord(String name, LocalDate date) {
+        attendances.validateAttendanceRecord(name, date);
+    }
+
+    public String editAttendance(String name, LocalDate date, LocalTime time) {
+        return attendances.editAttendance(name, date, time);
     }
 }

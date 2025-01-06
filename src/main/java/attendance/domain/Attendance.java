@@ -32,12 +32,22 @@ public class Attendance {
 
     @Override
     public String toString() {
-        return String.format("%s %s %s\n",
+        return String.format("%s %s %s",
                 DateFormatter.formatDate(date), DateFormatter.formatTime(time), status.getLabel());
     }
 
     public void setAttendanceTime(LocalTime attendedTime) {
         this.time = attendedTime;
         this.status = AttendanceStatus.findAttendanceStatus(date, attendedTime);
+    }
+
+    public String editAttendTime(LocalTime time) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.toString());
+        this.setAttendanceTime(time);
+        sb.append(" -> ");
+        sb.append(DateFormatter.formatTime(this.time) + " " + this.status.getLabel());
+        sb.append(" 수정 완료!");
+        return sb.toString();
     }
 }

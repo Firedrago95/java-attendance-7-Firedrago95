@@ -29,4 +29,9 @@ public class DateFormatter {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         return LocalTime.parse(input, dateTimeFormatter);
     }
+
+    public static LocalDate parseDate(String input) {
+        int day = Integer.parseInt(input);
+        return LocalDate.of(2024, 12, day);
+    }
 }

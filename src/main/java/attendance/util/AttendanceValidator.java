@@ -1,6 +1,7 @@
 package attendance.util;
 
 import attendance.constants.ErrorMessage;
+import camp.nextstep.edu.missionutils.DateTimes;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,6 +23,12 @@ public class AttendanceValidator {
         LocalTime closeTime = LocalTime.of(23, 0);
         if (time.isBefore(openTime) || time.isAfter(closeTime)) {
             throw new IllegalArgumentException(ErrorMessage.NO_OPEN.getMessage());
+        }
+    }
+
+    public static void validateFutureDate(LocalDate date) {
+        if (date.isAfter(DateTimes.now().toLocalDate())) {
+            throw new IllegalArgumentException(ErrorMessage.FUTURE.getMessage());
         }
     }
 }

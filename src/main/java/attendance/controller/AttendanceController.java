@@ -17,6 +17,7 @@ public class AttendanceController {
         while (true) {
             String option = InputView.selectOption(DateTimes.now());
             logAttendance(option);
+            editAttendance(option);
         }
     }
 
@@ -29,6 +30,21 @@ public class AttendanceController {
             LocalTime time = InputView.readTime();
             service.validateAttendTime(time);
             String result = service.attend(name, now, time);
+            OutputView.printAttendResult(result);
+        }
+    }
+
+    private void editAttendance(String option) {
+        if (option.equals("2")) {
+            String name = InputView.readEditName();
+            service.validateRegistration(name);
+            LocalDate date = InputView.readEditDate();
+            service.checkWeekendOrHoliday(date);
+            service.checkFuture(date);
+            service.hasAttendanceRecord(name, date);
+            LocalTime time = InputView.readEditTime();
+            service.validateAttendTime(time);
+            String result = service.editAttendance(name, date, time);
             OutputView.printAttendResult(result);
         }
     }
