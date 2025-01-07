@@ -34,24 +34,31 @@ public enum AttendanceStatus {
     }
 
     public static Map<AttendanceStatus, Integer> getAttendanceStatusResult(List<Attendance> attendanceRecord) {
+        Map<AttendanceStatus, Integer> attendanceCountMap = initializeAttendanceCountMap();
+        updateAttendanceCounts(attendanceRecord, attendanceCountMap);
+        adjustLateToAbsent(attendanceCountMap);
+        return attendanceCountMap;
+    }
+
+    private static Map<AttendanceStatus, Integer> initializeAttendanceCountMap() {
         Map<AttendanceStatus, Integer> map = new HashMap<>();
-        AttendanceStatus[] values = values();
-        for (AttendanceStatus value : values) {
-            map.put(value, 0);
-        }
-
-        for (Attendance attendance : attendanceRecord) {
-            AttendanceStatus status = attendance.getStatus();
-            map.put(status, map.get(status) + 1);
-        }
-
-        Integer lateCount = map.get(AttendanceStatus.LATE);
-        if (lateCount >= 3) {
-            int addAbsentCount = lateCount / 3;
-            map.put(AttendanceStatus.ABSENT, map.get(AttendanceStatus.ABSENT) + addAbsentCount);
-            map.put(AttendanceStatus.LATE, lateCount % 3);
+        for (AttendanceStatus status : AttendanceStatus.values()) {
+            map.put(status, 0);
         }
         return map;
+    }
+
+    private static void updateAttendanceCounts(List<Attendance> attendanceRecord, Map<AttendanceStatus, Integer> map) {
+        for (Attendance attendance : attendanceRecord) {
+            map.compute(attendance.getStatus(), (status, count) -> count + 1);
+        }
+    }
+
+    private static void adjustLateToAbsent(Map<AttendanceStatus, Integer> map) {
+        int lateCount = map.get(AttendanceStatus.LATE);
+        int addAbsentCount = lateCount / 3;
+        map.put(AttendanceStatus.ABSENT, map.get(AttendanceStatus.ABSENT) + addAbsentCount);
+        map.put(AttendanceStatus.LATE, lateCount % 3);
     }
 
     public String getLabel() {
