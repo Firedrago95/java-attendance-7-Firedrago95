@@ -21,6 +21,7 @@ public class DateFormatter {
     }
 
     public static String formatTime(LocalTime time) {
+        if (time == null) return "--:--";
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         return time.format(dateTimeFormatter);
     }

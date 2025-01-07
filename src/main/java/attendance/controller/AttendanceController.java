@@ -18,6 +18,7 @@ public class AttendanceController {
             String option = InputView.selectOption(DateTimes.now());
             logAttendance(option);
             editAttendance(option);
+            readCrewAttendanceRecord(option);
         }
     }
 
@@ -46,6 +47,16 @@ public class AttendanceController {
             service.validateAttendTime(time);
             String result = service.editAttendance(name, date, time);
             OutputView.printAttendResult(result);
+        }
+    }
+
+    private void readCrewAttendanceRecord(String option) {
+        if (option.equals("3")) {
+            String name = InputView.readName();
+            service.validateRegistration(name);
+            OutputView.printCrewAttendanceMessage(name);
+            String attendanceRecord = service.getAttendanceRecord(name, DateTimes.now().toLocalDate());
+            OutputView.printAttendResult(attendanceRecord);
         }
     }
 

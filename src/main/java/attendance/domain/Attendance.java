@@ -30,6 +30,10 @@ public class Attendance {
         return time;
     }
 
+    public AttendanceStatus getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
         return String.format("%s %s %s",

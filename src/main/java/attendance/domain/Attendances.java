@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Attendances {
     private List<Attendance> attendances;
@@ -66,5 +67,12 @@ public class Attendances {
                         && attendance.getDate().equals(date)).findFirst().get();
 
         return findAttendance.editAttendTime(time);
+    }
+
+    public List<Attendance> getAttendanceRecord(String name, LocalDate today) {
+        return attendances.stream()
+                .filter(attendance -> attendance.getName().equals(name)
+                        && attendance.getDate().isBefore(today))
+                .collect(Collectors.toList());
     }
 }

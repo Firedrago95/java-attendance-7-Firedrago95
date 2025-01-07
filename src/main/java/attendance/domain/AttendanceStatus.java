@@ -2,6 +2,9 @@ package attendance.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public enum AttendanceStatus {
     ATTENDANT("(출석)"),
@@ -28,6 +31,27 @@ public enum AttendanceStatus {
         if (time.isAfter(absentTime)) return ABSENT;
         if (time.isAfter(lateTime)) return LATE;
         return ATTENDANT;
+    }
+
+    public static Map<AttendanceStatus, Integer> getAttendanceStatusResult(List<Attendance> attendanceRecord) {
+        Map<AttendanceStatus, Integer> map = new HashMap<>();
+        AttendanceStatus[] values = values();
+        for (AttendanceStatus value : values) {
+            map.put(value, 0);
+        }
+
+        for (Attendance attendance : attendanceRecord) {
+            AttendanceStatus status = attendance.getStatus();
+            map.put(status, map.get(status) + 1);
+        }
+
+        Integer lateCount = map.get(AttendanceStatus.LATE);
+        if (lateCount >= 3) {
+            int addAbsentCount = lateCount / 3;
+            map.put(AttendanceStatus.ABSENT, map.get(AttendanceStatus.ABSENT) + addAbsentCount);
+            map.put(AttendanceStatus.LATE, lateCount % 3);
+        }
+        return map;
     }
 
     public String getLabel() {
