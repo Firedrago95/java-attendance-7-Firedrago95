@@ -2,14 +2,14 @@ package attendance.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public enum AttendanceStatus {
     ATTENDANT("(출석)"),
-    ABSENT("(결석)"),
-    LATE("(지각)");
+    LATE("(지각)"),
+    ABSENT("(결석)");
 
     private String label;
 
@@ -41,7 +41,7 @@ public enum AttendanceStatus {
     }
 
     private static Map<AttendanceStatus, Integer> initializeAttendanceCountMap() {
-        Map<AttendanceStatus, Integer> map = new HashMap<>();
+        Map<AttendanceStatus, Integer> map = new LinkedHashMap<>();
         for (AttendanceStatus status : AttendanceStatus.values()) {
             map.put(status, 0);
         }

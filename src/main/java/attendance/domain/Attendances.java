@@ -4,6 +4,8 @@ import attendance.constants.ErrorMessage;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,9 +72,11 @@ public class Attendances {
     }
 
     public List<Attendance> getAttendanceRecord(String name, LocalDate today) {
-        return attendances.stream()
+        List<Attendance> attendanceRecords = attendances.stream()
                 .filter(attendance -> attendance.getName().equals(name)
                         && attendance.getDate().isBefore(today))
                 .collect(Collectors.toList());
+        Collections.sort(attendanceRecords, Comparator.comparing(Attendance::getDate));
+        return attendanceRecords;
     }
 }

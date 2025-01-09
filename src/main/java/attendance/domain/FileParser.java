@@ -35,9 +35,9 @@ public class FileParser {
         String name = input[0];
         LocalDate date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         LocalTime time = LocalTime.parse(dateAndTime[1], DateTimeFormatter.ofPattern("HH:mm"));
-        attendedMember.add(name);
         attendances.add(new Attendance(name, date, time));
         checkAbsent(attendedMember, attendances, prevDate, date);
+        attendedMember.add(name);
         prevDate = date;
         return prevDate;
     }

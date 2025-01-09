@@ -73,20 +73,21 @@ public class AttendanceService {
         }
         sb.append(System.lineSeparator());
 
-        analyzeAttendResult(attendanceResult, sb);
+        sb.append(analyzeAttendResult(attendanceResult));
     }
 
-    private static void analyzeAttendResult(Map<AttendanceStatus, Integer> attendanceResult, StringBuilder sb) {
+    private static String analyzeAttendResult(Map<AttendanceStatus, Integer> attendanceResult) {
         Integer absentCount = attendanceResult.get(AttendanceStatus.ABSENT);
         if (absentCount > 5) {
-            sb.append("제적 대상자 입니다.").append(System.lineSeparator());
+            return "제적 대상자 입니다.\n";
         }
         if (absentCount >= 3) {
-            sb.append("면담 대상자 입니다.").append(System.lineSeparator());
+            return "면담 대상자 입니다.\n";
         }
         if (absentCount >= 2) {
-            sb.append("경고 대상자 입니다.").append(System.lineSeparator());
+            return "경고 대상자 입니다.\n";
         }
+        return "";
     }
 
     private String removeParentheses(String label) {
